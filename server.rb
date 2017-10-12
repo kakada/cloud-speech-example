@@ -16,10 +16,9 @@ get '/call_finished' do
   speech = Speech.new(API)
   audio_url = "#{VERBOICE_URL}/calls/#{request.params['CallSid']}/results/1507648840602.wav"
   result = speech.recognize audio_url, 'vi-VN'
-
   store result
 end
 
 def store result
-  #TODOLIST IN DB
+  # TODO
 end

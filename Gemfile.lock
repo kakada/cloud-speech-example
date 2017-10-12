@@ -10,6 +10,9 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     faraday (0.13.1)
       multipart-post (>= 1.2, < 3)
+    firebase (0.2.6)
+      httpclient
+      json
     google-api-client (0.14.4)
       addressable (~> 2.5, >= 2.5.1)
       googleauth (~> 0.5)
@@ -53,6 +56,7 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     httpclient (2.8.3)
+    json (2.1.0)
     jwt (1.5.6)
     little-plugger (1.1.4)
     logging (2.2.2)
@@ -100,13 +104,14 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  firebase
   google-api-client (~> 0.9)
   google-cloud-speech
   rest-client
   sinatra
 
 RUBY VERSION
-   ruby 2.4.1p111
+   ruby 2.4.0p0
 
 BUNDLED WITH
    1.15.4
