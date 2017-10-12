@@ -4,6 +4,8 @@ require 'json'
 
 require 'base64'
 
+LOG_FILE = '/tmp/recognize.txt'
+
 class Speech
   attr_reader :api_key
 
@@ -51,7 +53,7 @@ class Speech
         result = r if result['confidence'] < r['confidence']
       end
 
-      write result, '/tmp/recognize.txt'
+      log result
 
       result
     end
@@ -77,14 +79,14 @@ class Speech
     RestClient.post(url, params.to_json, {content_type: :json, accept: :json})
   end
 
-  def write result, file
+  def log result
     begin
-      File.open(file, 'a') do |f|
+      File.open(LOG_FILE, 'a') do |f|
         message = "Result - transcript: #{result["transcript"]}, confidence: #{result["confidence"]}"
         f.puts message
       end
     rescue Exception => e
-      puts "File #{file} doesn't exist"
+      puts "File #{LOG_FILE} doesn't exist"
     end
   end
 end

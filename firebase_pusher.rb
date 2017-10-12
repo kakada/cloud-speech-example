@@ -28,6 +28,7 @@ class FirebasePusher
     raw_data = json_response
 
     transcript = json_response['_text']
+    reported_at = json_response['reported_at']
     caller = json_response['caller']
     audio_url = json_response['audio_url']
 
@@ -49,6 +50,7 @@ class FirebasePusher
 
     data = {
       caller_number: caller,
+      reported_at: reported_at,
       audio_url: audio_url,
       transcript: transcript,
       raw_locations: raw_locations,

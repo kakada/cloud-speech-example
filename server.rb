@@ -13,6 +13,7 @@ FIREBASE_DB_URL = 'https://epihack-vn-2017.firebaseio.com/'
 
 get '/call_finished' do
   return unless request.params['CallStatus'] == 'completed'
+
   speech = Speech.new(API)
   audio_url = "#{VERBOICE_URL}/calls/#{request.params['CallSid']}/results/1507648840602.wav"
   result = speech.recognize audio_url, 'vi-VN'
@@ -20,7 +21,7 @@ get '/call_finished' do
   wit = Wit.new(access_token: WIT_TOKEN)
   json_response = wit.message result
 
-  store json_response.merge('caller' => request.params['From'], 'audio_url' => audio_url)
+  store json_response.merge('caller' => request.params['From'], 'audio_url' => audio_url, 'reported_at' => Time.now)
 end
 
 def store json_response
