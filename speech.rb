@@ -1,4 +1,8 @@
 require "google/cloud/speech"
+require 'rest-client'
+require 'json'
+
+require 'base64'
 
 class Speech
   attr_reader :api_key

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.4.0'
+ruby '2.4.1'
 
 gem 'sinatra'
 
@@ -9,5 +9,7 @@ gem 'google-cloud-speech'
 gem 'rest-client'
 
 gem 'firebase'
+
+gem 'wit'
 
 gem 'byebug'

@@ -98,6 +98,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.4)
+    wit (5.0.0)
 
 PLATFORMS
   ruby
@@ -109,9 +110,10 @@ DEPENDENCIES
   google-cloud-speech
   rest-client
   sinatra
+  wit
 
 RUBY VERSION
-   ruby 2.4.0p0
+   ruby 2.4.1p111
 
 BUNDLED WITH
    1.15.4
