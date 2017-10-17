@@ -4,8 +4,6 @@ require 'json'
 
 require 'base64'
 
-LOG_FILE = '/tmp/recognize.txt'
-
 class Speech
   attr_reader :api_key
 
@@ -16,14 +14,10 @@ class Speech
   def recognize audio_url, language = 'en-US', encoding = 'linear16', bit_rate = 8000, max_alternatives = 3
     url = "https://speech.googleapis.com/v1/speech:recognize?key=#{@api_key}"
 
-    content = nil
-
     resp = do_get_request audio_url
 
     if resp.code == 200
       content = fetch_content resp.file.path
-
-      return if content.nil?
 
       params = {
         config: {
@@ -38,6 +32,7 @@ class Speech
       }
 
       response = do_post_request url, params
+
       if response.code == 200
         transcript response.body
       end
@@ -53,7 +48,7 @@ class Speech
         result = r if result['confidence'] < r['confidence']
       end
 
-      log result
+      Logger.log "Result - transcript: #{result["transcript"]}, confidence: #{result["confidence"]}"
 
       result
     end
@@ -79,14 +74,4 @@ class Speech
     RestClient.post(url, params.to_json, {content_type: :json, accept: :json})
   end
 
-  def log result
-    begin
-      File.open(LOG_FILE, 'a') do |f|
-        message = "Result - transcript: #{result["transcript"]}, confidence: #{result["confidence"]}"
-        f.puts message
-      end
-    rescue Exception => e
-      puts "File #{LOG_FILE} doesn't exist"
-    end
-  end
 end
