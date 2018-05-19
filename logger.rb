@@ -1,12 +1,11 @@
+require_relative 'setting.rb'
+
 class Logger
-
-  LOG_FILE = '/tmp/recognize.txt'
-
   def self.log message
     begin
-      File.open(LOG_FILE, 'a') { |f| f.puts message }
+      File.open(Setting.output_log_file, 'a') { |f| f.puts message }
     rescue Exception => e
-      puts "File #{LOG_FILE} doesn't exist"
+      puts "File #{Setting.output_log_file} doesn't exist"
     end
   end
 end

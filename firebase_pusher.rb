@@ -34,19 +34,15 @@ class FirebasePusher
 
     entities = json_response['entities']
 
-    raw_locations = []
-    raw_locations = entities['location'] if entities['location']
-    locations = []
-    raw_locations.each do |location|
-      locations.push(location['value'])
-    end
+    raw_locations = entities['location'] ? entities['location'] : []
+    locations = raw_locations.map { |location| location['value'] }
 
-    raw_diseases = []
-    raw_diseases = entities['disease'] if entities['disease']
-    diseases = []
-    raw_diseases.each do |disease|
-      diseases.push(disease['value'])
-    end
+    raw_diseases = entities['disease'] ? entities['disease'] : []
+    diseases = raw_diseases.map { |disease| disease['value'] }
+
+    raw_cases = entities['number'] ? entities['number'] : []
+    cases = raw_cases.map { |kase| kase['value'] }
+    
 
     data = {
       caller_number: caller,
@@ -56,7 +52,10 @@ class FirebasePusher
       raw_locations: raw_locations,
       locations: locations,
       raw_diseases: raw_diseases,
-      diseases: diseases
+      diseases: diseases,
+      raw_diseases: raw_diseases,
+      cases: cases,
+      raw_cases: raw_cases
     }
 
     # PUSH TO FIREBASE AND GET THE RESPONSE
@@ -64,4 +63,5 @@ class FirebasePusher
     response = firebase.push("raw_data", data)
     puts response.success?, response.raw_body
   end
+
 end

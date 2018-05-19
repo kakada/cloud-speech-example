@@ -48,7 +48,7 @@ class Speech
         result = r if result['confidence'] < r['confidence']
       end
 
-      Logger.log "Result - transcript: #{result["transcript"]}, confidence: #{result["confidence"]}"
+      Logger.log "Result - transcript: #{result['transcript']}, confidence: #{result['confidence']}"
 
       result
     end
